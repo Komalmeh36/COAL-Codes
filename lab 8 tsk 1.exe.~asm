@@ -1,0 +1,20 @@
+.model small
+.stack 100h
+.data
+
+.code
+main:
+mov dl, '9'     ; start from 9
+
+loop1:
+mov ah, 02h
+int 21h         ; print character
+
+dec dl          ; go backward
+cmp dl, '0' - 1 ; stop after 0
+jne loop1
+
+mov ah, 4ch
+int 21h
+end main
+

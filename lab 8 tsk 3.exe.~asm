@@ -1,0 +1,26 @@
+.model small
+.stack 100h
+.data
+newline db 0dh,0ah,'$'
+
+.code
+main:
+mov dl, 'A'
+
+loop3:
+mov ah, 02h
+int 21h         ; print letter
+
+; print newline
+mov ah, 09h
+lea dx, newline
+int 21h
+
+inc dl
+cmp dl, 'Z' + 1
+jne loop3
+
+mov ah, 4ch
+int 21h
+end main
+
