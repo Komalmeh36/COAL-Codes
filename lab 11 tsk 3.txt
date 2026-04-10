@@ -1,0 +1,13 @@
+Task 3 Explanation (Step-wise – Combined & Clean)
+Initialize the data segment and load the address of the string into SI register.
+Move SI forward until the end of the string marked by the ‘$’ symbol is found.
+Decrement SI to point to the last valid character of the string.
+Start processing the string from the end towards the beginning.
+Identify each word by checking for space (‘ ’) or start boundary of the string.
+Count the number of characters in each word using the CX register.
+Store the starting address of the word and push each character of the word onto the stack.
+Due to LIFO behavior of stack, characters will be stored in reverse order.
+Pop characters from the stack one by one and display them using interrupt 21h.
+After printing each word, display a space to separate words.
+Repeat the process until all words in the string are processed.
+Terminate the program using interrupt 21h with function 4Ch.
