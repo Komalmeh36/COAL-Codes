@@ -1,0 +1,35 @@
+.MODEL SMALL
+.STACK 100H
+.DATA
+
+.CODE
+MAIN PROC
+    MOV CX, 4        ; number of rows
+    MOV BX, 1        ; row counter
+
+ROW_LOOP:
+    MOV DX, 1        ; column counter
+
+COL_LOOP:
+    MOV AH, 2
+    ADD DL, '0'      ; convert number to ASCII
+    INT 21H
+
+    INC DL
+    CMP DL, BL
+    JLE COL_LOOP
+
+    ; print new line
+    MOV AH, 2
+    MOV DL, 10
+    INT 21H
+    MOV DL, 13
+    INT 21H
+
+    INC BL
+    LOOP ROW_LOOP
+
+    MOV AH, 4CH
+    INT 21H
+MAIN ENDP
+END MAIN

@@ -1,0 +1,43 @@
+.MODEL SMALL
+.STACK 100H
+.DATA
+
+.CODE
+MAIN PROC
+    MOV CX, 5        ; rows (1 to 5)
+    MOV BX, 1        ; row number
+
+ROW_LOOP:
+    MOV SI, 1        ; column counter
+
+COL_LOOP:
+    MOV AX, BX       ; AX = row
+    MUL SI           ; AX = BX * SI
+
+    ; print number (single digit logic)
+    ADD AL, '0'
+    MOV DL, AL
+    MOV AH, 2
+    INT 21H
+
+    ; print space
+    MOV DL, ' '
+    INT 21H
+
+    INC SI
+    CMP SI, 6
+    JL COL_LOOP
+
+    ; new line
+    MOV DL, 10
+    INT 21H
+    MOV DL, 13
+    INT 21H
+
+    INC BX
+    LOOP ROW_LOOP
+
+    MOV AH, 4CH
+    INT 21H
+MAIN ENDP
+END MAIN
